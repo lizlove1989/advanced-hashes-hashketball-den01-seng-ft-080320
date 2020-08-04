@@ -104,7 +104,7 @@ end
 require 'pry'
 
 def num_points_scored(player_search)
-  game_hash.each do |team, team_info|
+  game_hash.select do |team, team_info|
     team_info[:players].each do |player|
       if player[:player_name] == player_search
         return player[:points]
@@ -114,8 +114,8 @@ def num_points_scored(player_search)
 end
 
 def shoe_size(name)
-  game_hash.each do |team, team_info|
-    team_info[:players].each do |player|
+  game_hash.select do |team, team_info|
+    team_info[:players].select do |player|
       if player[:player_name] == name
         return player[:shoe]
       end
@@ -158,7 +158,6 @@ def player_stats(input)
       if key == :players
         value.each do |player|
           if input == player[:player_name]
-            player.delete(:player_name) 
             return player
           end
         end
